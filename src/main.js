@@ -13,6 +13,19 @@ const textureLoader = new THREE.TextureLoader();
 const cubeTextureLoader = new THREE.CubeTextureLoader()
 cubeTextureLoader.setPath('/textures/cubeMap/')
 
+// add background
+const backgroundCubemap = cubeTextureLoader
+  .load([
+    'px.png',
+    'nx.png',
+    'py.png',
+    'ny.png',
+    'pz.png',
+    'nz.png'
+  ]);
+
+scene.background = backgroundCubemap
+
 // add geometry
 const sphereGeometry = new THREE.SphereGeometry(1, 32, 32)
 
@@ -129,7 +142,6 @@ const planetMeshes = planets.map((planet) => {
   const planetMesh = createPlanet(planet)
   scene.add(planetMesh)
 
-  // biome-ignore lint/complexity/noForEach: <explanation>
   planet.moons.forEach((moon) => {
     const moonMesh = createMoon(moon)
     planetMesh.add(moonMesh)
